@@ -1,10 +1,11 @@
 package carsharing;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.*;
-import java.util.Scanner;
 
 public class Main {
-    static CompanyDAO companyDAO;
     public static void main(String[] args) throws SQLException {
         String databaseFileName = "carsharing.mv.db";
 
@@ -14,48 +15,117 @@ public class Main {
 
         String url = "jdbc:h2:./src/carsharing/db/" + databaseFileName;
 
-        companyDAO = new CompanyDAO(url);
-        companyDAO.initialize();
-        mainMenu();
+        createTableIfNotExists(url);
 
+        try (Connection connection = DriverManager.getConnection(url)) {
+            connection.setAutoCommit(true);
+
+            int choice;
+            do {
+                System.out.println("1. Log in as a manager");
+                System.out.println("0. Exit");
+
+                choice = readInt();
+                switch (choice) {
+                    case 1:
+                        managerMenu(connection);
+                        break;
+                    case 0:
+                        break;
+                    default:
+                        System.out.println("Invalid choice, please try again.");
+                        break;
+                }
+            } while (choice != 0);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
+    private static void createTableIfNotExists(String url) {
+        try (Connection connection = DriverManager.getConnection(url)) {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS COMPANY (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(255) UNIQUE NOT NULL)");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
+    private static void managerMenu(Connection connection) throws SQLException {
+        int choice;
+        do {
+            System.out.println("1. Company list");
+            System.out.println("2. Create a company");
+            System.out.println("0. Back");
 
-    private static void mainMenu() {
-        System.out.println("1. Log in as a manager\n" +
-                "0. Exit");
-        Scanner scanner = new Scanner(System.in);
-        int input = Integer.parseInt(scanner.nextLine());
-        while (true) {
-            if (input == 1) {
-                loggedInAsManager();
+            choice = readInt();
+            switch (choice) {
+                case 1:
+                    printCompanyList(connection);
+                    break;
+                case 2:
+                    createCompany(connection);
+                    break;
+                case 0:
+                    break;
+                default:
+                    System.out.println("Invalid choice, please try again.");
+                    break;
             }
-            if (input == 0) {
-                break;
+        } while (choice != 0);
+    }
+
+    private static void printCompanyList(Connection connection) throws SQLException {
+        try (Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery("SELECT ID, NAME FROM COMPANY ORDER BY ID")) {
+            if (!resultSet.next()) {
+                System.out.println("The company list is empty!");
+            } else {
+                System.out.println("Company list:");
+                int index = 1;
+                do {
+                    System.out.printf("%d. %s\n", index++, resultSet.getString("NAME"));
+                } while (resultSet.next());
             }
         }
-
     }
 
-    private static void loggedInAsManager() {
-        System.out.println("1. Company list\n" +
-                "2. Create a company\n" +
-                "0. Back");
-        Scanner scanner = new Scanner(System.in);
-        int input = Integer.parseInt(scanner.nextLine());
-        if (input == 1) {
-            companyDAO.getCompanyList();
-        }
-        if (input == 2) {
-            System.out.println("Enter the company name:");
-            String companyName = scanner.nextLine();
-            companyDAO.insertCompany(companyName);
-        }
-        if (input == 0) {
-            mainMenu();
-        }
+    private static void createCompany(Connection connection) throws SQLException {
+        System.out.println("Enter the company name:");
+        String name = readString();
 
+        try (PreparedStatement statement = connection.prepareStatement("INSERT INTO COMPANY (NAME) VALUES (?)")) {
+            statement.setString(1, name);
+            int rowsInserted = statement.executeUpdate();
+            if (rowsInserted > 0) {
+                System.out.println("The company was created!");
+            } else {
+                System.out.println("Failed to create the company, please try again.");
+            }
+        }
     }
 
+    private static String readString() {
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            return reader.readLine().trim();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    private static int readInt() {
+        String input = readString();
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            return -1;
+        }
+    }
 }
+
+
+
+
+
