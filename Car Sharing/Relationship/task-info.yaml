@@ -752,12 +752,36 @@ files:
 
     }
   learner_created: true
+- name: src/carsharing/Car.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/140/stages/760/implement#comment
 status: Failed
 feedback:
-  message: |-
-    Wrong answer in test #4
-
-    Can&#39;t find table named &#39;car&#39;
-  time: "Sat, 22 Apr 2023 21:04:21 UTC"
+  message: "Wrong answer in test #6\n\nAfter choosing &#39;2. Create a company&#39;\
+    \ item you should ask to enter a company name.\nYour output should contain &#39;Enter\
+    \ the company name:&#39;\n\nPlease find below the output of your program during\
+    \ this failed test.\nNote that the &#39;&gt;&#39; character indicates the beginning\
+    \ of the input line.\n\n---\n\nArguments: -databaseFileName carsharing\n\nstdout:\n\
+    1. Log in as a manager\n0. Exit\n&gt; 1\n1. Company list\n2. Create a company\n\
+    0. Back\n&gt; 1\nChoose a company:\nThe company list is empty!\n&gt; 2\n\nstderr:\n\
+    org.h2.jdbc.JdbcSQLNonTransientException: No data is available [2000-200]\n\t\
+    at org.h2.message.DbException.getJdbcSQLException(DbException.java:449)\n\tat\
+    \ org.h2.message.DbException.getJdbcSQLException(DbException.java:429)\n\tat org.h2.message.DbException.get(DbException.java:205)\n\
+    \tat org.h2.message.DbException.get(DbException.java:181)\n\tat org.h2.message.DbException.get(DbException.java:170)\n\
+    \tat org.h2.jdbc.JdbcResultSet.checkOnValidRow(JdbcResultSet.java:3239)\n\tat\
+    \ org.h2.jdbc.JdbcResultSet.get(JdbcResultSet.java:3252)\n\tat org.h2.jdbc.JdbcResultSet.get(JdbcResultSet.java:3268)\n\
+    \tat org.h2.jdbc.JdbcResultSet.getInt(JdbcResultSet.java:352)\n\tat carsharing.Main.getSelectedCompany(Main.java:92)\n\
+    \tat carsharing.Main.managerMenu(Main.java:73)\n\tat carsharing.Main.main(Main.java:34)\n\
+    \tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\
+    \tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)\n\
+    \tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\
+    \tat java.base/java.lang.reflect.Method.invoke(Method.java:568)\n\tat org.hyperskill.hstest.testing.execution.MainMethodExecutor.invokeMain(MainMethodExecutor.java:160)\n\
+    \tat org.hyperskill.hstest.testing.execution.MainMethodExecutor.lambda$launch$1(MainMethodExecutor.java:188)\n\
+    \tat java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)\n\
+    \tat java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)\n\tat\
+    \ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)\n\
+    \tat java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)\n\
+    \tat java.base/java.lang.Thread.run(Thread.java:833)"
+  time: "Mon, 24 Apr 2023 13:57:48 UTC"
 record: 3

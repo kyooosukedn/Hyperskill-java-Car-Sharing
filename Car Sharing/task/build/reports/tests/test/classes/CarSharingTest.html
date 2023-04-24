@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.569s</div>
+<div class="counter">1.365s</div>
 <p>duration</p>
 </div>
 </td>
@@ -69,6 +69,9 @@
 <li>
 <a href="#tab2">Standard output</a>
 </li>
+<li>
+<a href="#tab3">Standard error</a>
+</li>
 </ul>
 <div id="tab0" class="tab">
 <h2>Failed tests</h2>
@@ -76,9 +79,55 @@
 <a name="start"></a>
 <h3 class="failures">start</h3>
 <span class="code">
-<pre>java.lang.AssertionError: Wrong answer in test #4
+<pre>java.lang.AssertionError: Wrong answer in test #6
 
-Can't find table named 'car'
+After choosing '2. Create a company' item you should ask to enter a company name.
+Your output should contain 'Enter the company name:'
+
+Please find below the output of your program during this failed test.
+Note that the '&gt;' character indicates the beginning of the input line.
+
+---
+
+Arguments: -databaseFileName carsharing
+
+stdout:
+1. Log in as a manager
+0. Exit
+&gt; 1
+1. Company list
+2. Create a company
+0. Back
+&gt; 1
+Choose a company:
+The company list is empty!
+&gt; 2
+
+stderr:
+org.h2.jdbc.JdbcSQLNonTransientException: No data is available [2000-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:449)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.message.DbException.get(DbException.java:170)
+	at org.h2.jdbc.JdbcResultSet.checkOnValidRow(JdbcResultSet.java:3239)
+	at org.h2.jdbc.JdbcResultSet.get(JdbcResultSet.java:3252)
+	at org.h2.jdbc.JdbcResultSet.get(JdbcResultSet.java:3268)
+	at org.h2.jdbc.JdbcResultSet.getInt(JdbcResultSet.java:352)
+	at carsharing.Main.getSelectedCompany(Main.java:92)
+	at carsharing.Main.managerMenu(Main.java:73)
+	at carsharing.Main.main(Main.java:34)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.hyperskill.hstest.testing.execution.MainMethodExecutor.invokeMain(MainMethodExecutor.java:160)
+	at org.hyperskill.hstest.testing.execution.MainMethodExecutor.lambda$launch$1(MainMethodExecutor.java:188)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
 	at org.junit.Assert.fail(Assert.java:89)
 	at org.hyperskill.hstest.stage.StageTest.start(StageTest.java:203)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -141,7 +190,7 @@ Can't find table named 'car'
 </thead>
 <tr>
 <td class="failures">start</td>
-<td class="failures">0.569s</td>
+<td class="failures">1.365s</td>
 <td class="failures">failed</td>
 </tr>
 </table>
@@ -169,6 +218,50 @@ Start test 2?[0m
 Start test 3?[0m
 ?[1;31m
 Start test 4?[0m
+?[1;31m
+Start test 5?[0m
+?[1;31m
+Start test 6?[0m
+1. Log in as a manager
+0. Exit
+&gt; 1
+1. Company list
+2. Create a company
+0. Back
+&gt; 1
+Choose a company:
+The company list is empty!
+&gt; 2
+</pre>
+</span>
+</div>
+<div id="tab3" class="tab">
+<h2>Standard error</h2>
+<span class="code">
+<pre>org.h2.jdbc.JdbcSQLNonTransientException: No data is available [2000-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:449)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.message.DbException.get(DbException.java:170)
+	at org.h2.jdbc.JdbcResultSet.checkOnValidRow(JdbcResultSet.java:3239)
+	at org.h2.jdbc.JdbcResultSet.get(JdbcResultSet.java:3252)
+	at org.h2.jdbc.JdbcResultSet.get(JdbcResultSet.java:3268)
+	at org.h2.jdbc.JdbcResultSet.getInt(JdbcResultSet.java:352)
+	at carsharing.Main.getSelectedCompany(Main.java:92)
+	at carsharing.Main.managerMenu(Main.java:73)
+	at carsharing.Main.main(Main.java:34)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.hyperskill.hstest.testing.execution.MainMethodExecutor.invokeMain(MainMethodExecutor.java:160)
+	at org.hyperskill.hstest.testing.execution.MainMethodExecutor.lambda$launch$1(MainMethodExecutor.java:188)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
 </pre>
 </span>
 </div>
@@ -180,7 +273,7 @@ Start test 4?[0m
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.3.3</a> at Apr 22, 2023, 11:04:20 PM</p>
+<a href="http://www.gradle.org">Gradle 7.3.3</a> at Apr 24, 2023, 3:57:48 PM</p>
 </div>
 </div>
 </body>
